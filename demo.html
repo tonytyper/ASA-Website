@@ -1,0 +1,1089 @@
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASA of UNLV</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&amp;family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&amp;family=Lato:wght@300;400;700&amp;display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F1E5CF;
+    --parchment: #D49C67;
+    --terracotta: #C24535;
+    --rust: #996A39;
+    --navy: #0F5066;
+    --gold: #D49C67;
+    --text: #195265;
+    --muted: #996A39;
+    /* raw channel values for rgba() usage */
+    --navy-rgb: 15, 80, 102;
+    --terracotta-rgb: 194, 69, 53;
+    --cream-rgb: 241, 229, 207;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── ORNAMENT SVG pattern ── */
+  .ornament-border {
+    width: 100%;
+    height: 28px;
+    background-image: url("picsvg_modified.svg");
+    background-repeat: repeat-x;
+    background-size: 200px 28px;
+    opacity: 0.85;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(var(--navy-rgb), 0.97);
+    backdrop-filter: blur(8px);
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+    border-bottom: 2px solid var(--terracotta);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--cream);
+    letter-spacing: 0.05em;
+  }
+  .nav-logo span { color: var(--terracotta); }
+
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(var(--cream-rgb), 0.75);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--terracotta); }
+
+  .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--cream); transition: 0.3s; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    background: var(--cream);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 100px 5% 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Armenian knotwork corner decorations */
+  #hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(ellipse 60% 50% at 50% 50%, rgba(var(--terracotta-rgb), 0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-ornament {
+    position: absolute;
+    font-size: 8rem;
+    opacity: 0.40;
+    color: var(--terracotta);
+    font-family: serif;
+  }
+  .hero-ornament.tl { top: 5%; left: 3%; }
+  .hero-ornament.tr { top: 5%; right: 3%; transform: scaleX(-1); }
+  .hero-ornament.bl { bottom: 8%; left: 3%; transform: scaleY(-1); }
+  .hero-ornament.br { bottom: 8%; right: 3%; transform: scale(-1); }
+
+  /* SVG Seal placeholder */
+  .hero-seal {
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #1a6880 0%, var(--navy) 60%, #07303d 100%);
+    border: 3px solid var(--terracotta);
+    box-shadow: 0 0 0 6px rgba(var(--terracotta-rgb), 0.15), 0 20px 60px rgba(0,0,0,0.5);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 2.5rem;
+    position: relative;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .hero-seal svg { width: 90px; height: 90px; }
+
+  .hero-eyebrow {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 1rem;
+    animation: fadeUp 0.8s ease both 0.2s;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 6vw, 4.5rem);
+    font-weight: 700;
+    color: var(--);
+    line-height: 1.1;
+    margin-bottom: 0.4rem;
+    animation: fadeUp 0.8s ease both 0.4s;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--terracotta);
+  }
+
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1rem, 2vw, 1.35rem);
+    font-weight: 300;
+    color: rgba(var(--), 0.6);
+    letter-spacing: 0.08em;
+    margin-bottom: 2.5rem;
+    animation: fadeUp 0.8s ease both 0.6s;
+  }
+
+  .hero-ctas {
+    display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+    animation: fadeUp 0.8s ease both 0.8s;
+  }
+
+  .btn-primary {
+    background: var(--terracotta);
+    color: var(--cream);
+    padding: 0.8rem 2rem;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 2px solid var(--terracotta);
+    transition: all 0.25s;
+  }
+  .btn-primary:hover { background: var(--rust); border-color: var(--rust); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(var(--terracotta-rgb), 0.35); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--terracotta);
+    padding: 0.8rem 2rem;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 2px solid rgba(var(--cream-rgb), 0.35);
+    transition: all 0.25s;
+  }
+  .btn-outline:hover { border-color: var(--cream); transform: translateY(-2px); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-scroll {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+    animation: fadeUp 1s ease both 1.2s;
+  }
+  .hero-scroll span { font-size: 0.65rem; letter-spacing: 0.2em; color: rgba(var(--cream-rgb), 0.35); text-transform: uppercase; }
+  .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, rgba(var(--terracotta-rgb), 0.6), transparent); animation: scrollPulse 2s ease-in-out infinite; }
+  @keyframes scrollPulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+  /* ── SECTIONS COMMON ── */
+  section { padding: 6rem 5%; }
+
+  .section-label {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.15;
+    margin-bottom: 1.25rem;
+  }
+
+  .section-title em { font-style: italic; color: var(--terracotta); }
+
+  .section-body {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    line-height: 1.8;
+    color: var(--text);
+    max-width: 680px;
+  }
+
+  .divider {
+    width: 60px; height: 2px;
+    background: var(--terracotta);
+    margin: 1.25rem 0;
+  }
+
+  /* ── ABOUT ── */
+  #about {
+    background: var(--parchment);
+    position: relative;
+  }
+  #about::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, var(--terracotta), transparent);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+
+  .stat-card {
+    background: var(--cream);
+    border: 1px solid rgba(184,92,56,0.2);
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stat-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--terracotta);
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--terracotta);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.3rem;
+  }
+
+  .about-visual {
+    position: relative;
+  }
+
+  .about-img-frame {
+    background: linear-gradient(135deg, var(--navy) 0%, #1a6880 100%);
+    aspect-ratio: 4/5;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about-img-frame::after {
+    content: '';
+    position: absolute; inset: 12px;
+    border: 1px solid rgba(184,92,56,0.3);
+    pointer-events: none;
+  }
+
+  .about-frame-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: rgba(245,240,232,0.4);
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .about-tag {
+    position: absolute;
+    bottom: -1.5rem; right: -1.5rem;
+    background: var(--terracotta);
+    color: var(--cream);
+    padding: 1rem 1.5rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 0.9rem;
+    font-style: italic;
+  }
+
+  /* ── EVENTS ── */
+  #events { background: var(--cream); }
+
+  .events-header {
+    max-width: 1100px; margin: 0 auto 3rem;
+    display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem;
+  }
+
+  .events-grid {
+    max-width: 1100px; margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+  }
+
+  .event-card {
+    background: var(--parchment);
+    border: 1px solid rgba(184,92,56,0.15);
+    overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+    position: relative;
+  }
+
+  .event-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(28,43,74,0.12); }
+
+  .event-card-top {
+    background: var(--navy);
+    padding: 1.5rem 1.5rem 1rem;
+    position: relative;
+  }
+
+  .event-date {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--terracotta);
+    line-height: 1;
+  }
+
+  .event-month {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.5);
+  }
+
+  .event-tag {
+    position: absolute; top: 1rem; right: 1rem;
+    background: rgba(184,92,56,0.2);
+    color: var(--terracotta);
+    padding: 0.25rem 0.75rem;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: 1px solid rgba(184,92,56,0.3);
+  }
+
+  .event-card-body { padding: 1.5rem; }
+
+  .event-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+  }
+
+  .event-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    color: var(--text);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .event-meta {
+    display: flex; gap: 1.25rem; flex-wrap: wrap;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+  }
+
+  .event-meta span { display: flex; align-items: center; gap: 0.35rem; }
+
+  /* ── OFFICERS ── */
+  #officers {
+    background: var(--navy);
+    position: relative;
+  }
+
+  #officers .section-title { color: var(--cream); }
+  #officers .section-label { color: var(--terracotta); }
+  #officers .divider { background: var(--terracotta); }
+
+  .officers-header { max-width: 1100px; margin: 0 auto 3rem; }
+
+  .officers-grid {
+    max-width: 1100px; margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .officer-card {
+    border: 1px solid rgba(184,92,56,0.25);
+    overflow: hidden;
+    transition: transform 0.25s, border-color 0.25s;
+  }
+
+  .officer-card:hover { transform: translateY(-4px); border-color: var(--terracotta); }
+
+  .officer-avatar {
+    background: linear-gradient(135deg, #1a6880, var(--navy));
+    aspect-ratio: 1;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: rgba(245,240,232,0.2);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .officer-avatar::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, transparent 50%, rgba(28,43,74,0.9));
+  }
+
+  .officer-initials {
+    position: absolute; bottom: 0.75rem; left: 0; right: 0;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: rgba(245,240,232,0.15);
+    text-align: center;
+    z-index: 1;
+  }
+
+  .officer-info {
+    background: rgba(255,255,255,0.04);
+    padding: 1.1rem;
+    border-top: 2px solid var(--terracotta);
+  }
+
+  .officer-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--cream);
+    margin-bottom: 0.2rem;
+  }
+
+  .officer-role {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: var(--parchment);
+    position: relative;
+  }
+
+  .contact-grid {
+    max-width: 1100px; margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .contact-info-list { margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem; }
+
+  .contact-item {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 1rem 1.25rem;
+    background: var(--cream);
+    border-left: 3px solid var(--terracotta);
+  }
+
+  .contact-icon {
+    width: 36px; height: 36px; flex-shrink: 0;
+    background: rgba(184,92,56,0.1);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--terracotta);
+    font-size: 1rem;
+  }
+
+  .contact-item-label {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.2rem;
+  }
+
+  .contact-item-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    color: var(--navy);
+  }
+
+  /* Form */
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+
+  .form-group label {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background: var(--cream);
+    border: 1px solid rgba(184,92,56,0.25);
+    padding: 0.85rem 1rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s;
+    resize: vertical;
+    -webkit-appearance: none;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--terracotta);
+    box-shadow: 0 0 0 3px rgba(184,92,56,0.1);
+  }
+
+  .form-group textarea { min-height: 120px; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #0A1220;
+    padding: 3rem 5%;
+    text-align: center;
+    border-top: 2px solid var(--terracotta);
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--cream);
+    margin-bottom: 0.5rem;
+  }
+  .footer-logo span { color: var(--terracotta); }
+
+  .footer-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    color: rgba(245,240,232,0.35);
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+  }
+
+  .footer-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 2rem; }
+  .footer-links a {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.4);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--terracotta); }
+
+  .footer-copy {
+    font-size: 0.7rem;
+    color: rgba(245,240,232,0.2);
+    letter-spacing: 0.08em;
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; flex-direction: column; position: fixed; top: 64px; left: 0; right: 0; background: rgba(28,43,74,0.98); padding: 2rem; gap: 1.5rem; }
+    .nav-links.open { display: flex; }
+    .nav-toggle { display: flex; }
+    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .about-visual { display: none; }
+    .form-row { grid-template-columns: 1fr; }
+    .officers-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Armenian Student Association of UNLV<span></span></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#officers">Officers</a></li>
+    <li><a href="#contact">Join Us</a></li>
+  </ul>
+  <div class="nav-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-ornament tl">❧</div>
+  <div class="hero-ornament tr">❧</div>
+  <div class="hero-ornament bl">❧</div>
+  <div class="hero-ornament br">❧</div>
+
+  <div class="hero-seal">
+    <!-- Mount Ararat + Eternity Wheel icon -->
+    <svg viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+      <!-- sky/background -->
+      <circle cx="45" cy="45" r="43" fill="#0F5066"></circle>
+      <!-- outer ring -->
+      <circle cx="45" cy="45" r="42" fill="none" stroke="#B85C38" stroke-width="1.5"></circle>
+      <circle cx="45" cy="45" r="37" fill="none" stroke="#B85C38" stroke-width="0.6" stroke-dasharray="3 3"></circle>
+      <!-- mountain snow cap -->
+      <polygon points="45,18 54,35 36,35" fill="#E8EEF5"></polygon>
+      <polygon points="45,22 51,33 39,33" fill="white"></polygon>
+      <!-- mountain body -->
+      <polygon points="32,52 45,28 58,52" fill="#195265"></polygon>
+      <polygon points="38,52 45,32 52,52" fill="#1a6880"></polygon>
+      <!-- horizon -->
+      <rect x="20" y="52" width="50" height="2" fill="#B85C38" opacity="0.6"></rect>
+      <!-- eternity wheel (Arevakhach) -->
+      <circle cx="45" cy="62" r="9" fill="#8B1A1A"></circle>
+      <circle cx="45" cy="62" r="6" fill="none" stroke="#F5F0E8" stroke-width="0.8"></circle>
+      <circle cx="45" cy="62" r="2" fill="#F5F0E8"></circle>
+      <!-- wheel spokes -->
+      <g stroke="#F5F0E8" stroke-width="0.7" opacity="0.9">
+        <line x1="45" y1="53" x2="45" y2="57"></line>
+        <line x1="45" y1="67" x2="45" y2="71"></line>
+        <line x1="36" y1="62" x2="40" y2="62"></line>
+        <line x1="50" y1="62" x2="54" y2="62"></line>
+        <line x1="38.5" y1="55.5" x2="41.3" y2="58.3"></line>
+        <line x1="48.7" y1="65.7" x2="51.5" y2="68.5"></line>
+        <line x1="51.5" y1="55.5" x2="48.7" y2="58.3"></line>
+        <line x1="41.3" y1="65.7" x2="38.5" y2="68.5"></line>
+      </g>
+    <!-- Code injected by live-server -->
+<script>
+	//   &lt;-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i &lt; sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href &amp;&amp; typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&amp;|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') &gt;= 0 ? '&amp;' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage &amp;&amp; !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// 
+</script>
+</svg>
+  </div>
+
+  <p class="hero-eyebrow">University of Nevada, Las Vegas</p>
+  <h1 class="hero-title">Armenian Student<br><em>Association</em></h1>
+  <p class="hero-sub">Preserving Heritage · Building Community · Inspiring Future Leaders</p>
+
+  <div class="hero-ctas">
+    <a href="#contact" class="btn-primary">Join Our Community</a>
+    <a href="#about" class="btn-primary">Learn More</a>
+  </div>
+
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<div class="ornament-border"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div>
+      <p class="section-label">Who We Are</p>
+      <h2 class="section-title">A Home Away<br>from <em>Home</em></h2>
+      <div class="divider"></div>
+      <p class="section-body">
+        The Armenian Student Association at UNLV is a cultural and social organization dedicated to celebrating Armenian heritage, fostering a supportive community on campus, and educating the broader UNLV family about Armenian history and culture.
+      </p>
+      <p class="section-body" style="margin-top:1rem;">
+        Whether you're Armenian, Armenian-American, or simply curious about our culture, you are welcome here. We host cultural events, volunteering opportunities, and social gatherings throughout the academic year.
+      </p>
+
+      <div class="about-stats">
+        <div class="stat-card">
+          <div class="stat-num">25+</div>
+          <div class="stat-label">Years Active</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">100+</div>
+          <div class="stat-label">Members</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">10+</div>
+          <div class="stat-label">Annual Events</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">3</div>
+          <div class="stat-label">Mentor Tracks</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-visual">
+      <div class="about-img-frame">
+        <!-- Decorative SVG Armenian pattern -->
+        <svg viewBox="0 0 200 240" width="180" opacity="0.25" xmlns="http://www.w3.org/2000/svg">
+          <g stroke="#C24535" stroke-width="1" fill="none">
+            <path d="M100 20 Q130 50 100 80 Q70 50 100 20Z"></path>
+            <path d="M100 20 Q130 50 100 80 Q70 50 100 20Z" transform="translate(0,80)"></path>
+            <path d="M100 20 Q130 50 100 80 Q70 50 100 20Z" transform="translate(0,160)"></path>
+            <circle cx="100" cy="120" r="30"></circle>
+            <circle cx="100" cy="120" r="20"></circle>
+            <circle cx="100" cy="120" r="8"></circle>
+            <line x1="70" y1="120" x2="130" y2="120"></line>
+            <line x1="100" y1="90" x2="100" y2="150"></line>
+            <line x1="79" y1="99" x2="121" y2="141"></line>
+            <line x1="121" y1="99" x2="79" y2="141"></line>
+          </g>
+        <!-- Code injected by live-server -->
+<script>
+	//   &lt;-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i &lt; sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href &amp;&amp; typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&amp;|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') &gt;= 0 ? '&amp;' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage &amp;&amp; !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// 
+</script>
+</svg>
+        <div class="about-frame-text">Հայկական ուսանողական<br>ընկերակցություն</div>
+      </div>
+      <div class="about-tag">Est. 2001 at UNLV</div>
+    </div>
+  </div>
+</section>
+
+<div class="ornament-border"></div>
+
+<!-- EVENTS -->
+<section id="events">
+  <div class="events-header">
+    <div>
+      <p class="section-label">What's Happening</p>
+      <h2 class="section-title">Upcoming <em>Events</em></h2>
+    </div>
+    <a href="#contact" class="btn-outline" style="border-color: var(--terracotta); color: var(--terracotta);">All Events →</a>
+  </div>
+
+  <div class="events-grid">
+    <div class="event-card">
+      <div class="event-card-top">
+        <div class="event-month">April</div>
+        <div class="event-date">24</div>
+        <div class="event-tag">Memorial</div>
+      </div>
+      <div class="event-card-body">
+        <div class="event-name">Armenian Genocide Remembrance Day</div>
+        <p class="event-desc">A solemn and powerful commemorative ceremony honoring the 1.5 million lives lost in the Armenian Genocide of 1915.</p>
+        <div class="event-meta">
+          <span>🕯 On Campus</span>
+          <span>📅 April 24</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="event-card">
+      <div class="event-card-top">
+        <div class="event-month">Spring</div>
+        <div class="event-date">TBD</div>
+        <div class="event-tag">Cultural</div>
+      </div>
+      <div class="event-card-body">
+        <div class="event-name">Armenian Culture Night</div>
+        <p class="event-desc">An evening celebrating Armenian music, dance, cuisine, and art. Open to all UNLV students and the Las Vegas Armenian community.</p>
+        <div class="event-meta">
+          <span>🎶 UNLV Campus</span>
+          <span>📅 Spring 2025</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="event-card">
+      <div class="event-card-top">
+        <div class="event-month">Ongoing</div>
+        <div class="event-date">★</div>
+        <div class="event-tag">Program</div>
+      </div>
+      <div class="event-card-body">
+        <div class="event-name">Peer Mentor Program</div>
+        <p class="event-desc">Connect with mentors in Medical, Law, and Psychology fields. Meet at least three times a semester and build your professional network.</p>
+        <div class="event-meta">
+          <span>📚 Medical · Law · Psychology</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ornament-border"></div>
+
+<!-- OFFICERS -->
+<section id="officers">
+  <div class="officers-header">
+    <p class="section-label">Leadership</p>
+    <h2 class="section-title">Meet Our <em>Officers</em></h2>
+    <div class="divider"></div>
+  </div>
+
+  <div class="officers-grid">
+    <div class="officer-card">
+      <div class="officer-avatar">
+        <div class="officer-initials">P</div>
+      </div>
+      <div class="officer-info">
+        <div class="officer-name">President</div>
+        <div class="officer-role">Executive Board</div>
+      </div>
+    </div>
+    <div class="officer-card">
+      <div class="officer-avatar">
+        <div class="officer-initials">VP</div>
+      </div>
+      <div class="officer-info">
+        <div class="officer-name">Vice President</div>
+        <div class="officer-role">Executive Board</div>
+      </div>
+    </div>
+    <div class="officer-card">
+      <div class="officer-avatar">
+        <div class="officer-initials">S</div>
+      </div>
+      <div class="officer-info">
+        <div class="officer-name">Secretary</div>
+        <div class="officer-role">Executive Board</div>
+      </div>
+    </div>
+    <div class="officer-card">
+      <div class="officer-avatar">
+        <div class="officer-initials">T</div>
+      </div>
+      <div class="officer-info">
+        <div class="officer-name">Treasurer</div>
+        <div class="officer-role">Executive Board</div>
+      </div>
+    </div>
+    <div class="officer-card">
+      <div class="officer-avatar">
+        <div class="officer-initials">PR</div>
+      </div>
+      <div class="officer-info">
+        <div class="officer-name">Public Relations</div>
+        <div class="officer-role">Officer</div>
+      </div>
+    </div>
+    <div class="officer-card">
+      <div class="officer-avatar">
+        <div class="officer-initials">EO</div>
+      </div>
+      <div class="officer-info">
+        <div class="officer-name">Events Officer</div>
+        <div class="officer-role">Officer</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ornament-border"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-grid">
+    <div>
+      <p class="section-label">Get Involved</p>
+      <h2 class="section-title">Join Our <em>Community</em></h2>
+      <div class="divider"></div>
+      <p class="section-body">
+        Whether you're looking to connect with Armenian culture, find community, or build your professional network — we'd love to have you. Fill out the form or reach us directly.
+      </p>
+
+      <div class="contact-info-list">
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-item-label">Location</div>
+            <div class="contact-item-value">University of Nevada, Las Vegas</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📸</div>
+          <div>
+            <div class="contact-item-label">Instagram</div>
+            <div class="contact-item-value"><a href="https://www.instagram.com/asaofunlv/" target="_blank">@asaofunlv</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">✉️</div>
+          <div>
+            <div class="contact-item-label">Involvement Center</div>
+            <div class="contact-item-value"><a href="https://involvementcenter.unlv.edu/organization/armenianstudentassociation" target="_blank">Join us here!</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PLACEHOLDER FOR CONTACT FORM-->
+    <div>
+      <div class="contact-form">
+        <div class="form-row">
+          <div class="form-group">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+
+</body></html>
