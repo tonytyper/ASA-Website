@@ -53,12 +53,20 @@ nav {
 }
 
 .nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
   font-family: 'Playfair Display', serif;
   font-size: 1.1rem;
   color: var(--cream);
   letter-spacing: 0.05em;
+  text-decoration: none;
 }
-.nav-logo span { color: var(--terracotta); }
+.nav-logo img {
+  width: auto;
+  height: 44px;
+}
+.nav-logo:hover .nav-logo-text { color: var(--terracotta); }
 
 .nav-links { display: flex; gap: 2rem; list-style: none; }
 .nav-links a {
@@ -108,13 +116,8 @@ nav {
 .hero-ornament.bl { bottom: 8%; left: 3%; transform: scaleY(-1); }
 .hero-ornament.br { bottom: 8%; right: 3%; transform: scale(-1); }
 
-/* SVG Seal placeholder */
+/* ASA logo */
 .hero-seal {
-  width: 140px; height: 140px;
-  border-radius: 50%;
-  background: radial-gradient(circle, #1a6880 0%, var(--navy) 60%, #07303d 100%);
-  border: 3px solid var(--terracotta);
-  box-shadow: 0 0 0 6px rgba(var(--terracotta-rgb), 0.15), 0 20px 60px rgba(0,0,0,0.5);
   display: flex; align-items: center; justify-content: center;
   margin-bottom: 2.5rem;
   position: relative;
@@ -126,7 +129,11 @@ nav {
   50% { transform: translateY(-10px); }
 }
 
-.hero-seal svg { width: 90px; height: 90px; }
+.hero-seal img {
+  width: 160px;
+  height: auto;
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.45));
+}
 
 .hero-eyebrow {
   font-family: 'Lato', sans-serif;
@@ -455,12 +462,14 @@ section { padding: 6rem 5%; }
 
 .officers-grid {
   max-width: 1100px; margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 1.5rem;
 }
 
 .officer-card {
+  flex: 0 0 196px;
   border: 1px solid rgba(184,92,56,0.25);
   overflow: hidden;
   transition: transform 0.25s, border-color 0.25s;
@@ -470,7 +479,7 @@ section { padding: 6rem 5%; }
 
 .officer-avatar {
   background: linear-gradient(135deg, #1a6880, var(--navy));
-  aspect-ratio: 1;
+  aspect-ratio: 3 / 4;
   display: flex; align-items: center; justify-content: center;
   font-family: 'Playfair Display', serif;
   font-size: 2rem;
@@ -514,8 +523,7 @@ section { padding: 6rem 5%; }
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--terracotta);
+  color: var(--cream);
 }
 
 /* ── CONTACT ── */
@@ -656,5 +664,5 @@ footer {
   .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
   .about-visual { display: none; }
   .form-row { grid-template-columns: 1fr; }
-  .officers-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+  .officer-card { flex-basis: 160px; }
 }
