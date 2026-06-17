@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 export default function About() {
     return (
         <>
@@ -38,24 +40,12 @@ export default function About() {
 
                     <div className="about-visual">
                         <div className="about-img-frame">
-                            {/* Decorative SVG Armenian pattern */}
-                            <svg viewBox="0 0 200 240" width="180" opacity="0.25" xmlns="http://www.w3.org/2000/svg">
-                                <g stroke="#C24535" strokeWidth="1" fill="none">
-                                    <path d="M100 20 Q130 50 100 80 Q70 50 100 20Z"></path>
-                                    <path d="M100 20 Q130 50 100 80 Q70 50 100 20Z" transform="translate(0,80)"></path>
-                                    <path d="M100 20 Q130 50 100 80 Q70 50 100 20Z" transform="translate(0,160)"></path>
-                                    <circle cx="100" cy="120" r="30"></circle>
-                                    <circle cx="100" cy="120" r="20"></circle>
-                                    <circle cx="100" cy="120" r="8"></circle>
-                                    <line x1="70" y1="120" x2="130" y2="120"></line>
-                                    <line x1="100" y1="90" x2="100" y2="150"></line>
-                                    <line x1="79" y1="99" x2="121" y2="141"></line>
-                                    <line x1="121" y1="99" x2="79" y2="141"></line>
-                                </g>
-                            </svg>
-                            <div className="about-frame-text">
-                                Հայ ուսանողների<br />ակումբ
-                            </div>
+                            <Image
+                                src="/about_img.PNG"
+                                alt="Armenian Student Association at UNLV members"
+                                fill
+                                style={{ objectFit: "cover" }}
+                            />
                         </div>
                         <div className="about-tag">Est. 2001 at UNLV</div>
                     </div>
