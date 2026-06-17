@@ -585,7 +585,7 @@ section { padding: 6rem 5%; }
   font-weight: 700;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--terracotta);
 }
 
 .form-group input,
@@ -610,7 +610,62 @@ section { padding: 6rem 5%; }
   box-shadow: 0 0 0 3px rgba(184,92,56,0.1);
 }
 
+/* Faint placeholder text, shared by inputs/textarea and the empty select */
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: rgba(25, 82, 101, 0.45);
+}
+
+.form-group select {
+  appearance: none;
+  -moz-appearance: none;
+  padding-right: 2.5rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23C24535' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 0.7rem;
+}
+
+.form-group select:invalid {
+  color: rgba(25, 82, 101, 0.45);
+}
+
+.form-group select option {
+  color: var(--text);
+}
+
 .form-group textarea { min-height: 120px; }
+
+.contact-form .btn-primary {
+  margin-top: 0.5rem;
+  align-self: flex-start;
+  cursor: pointer;
+}
+
+.contact-form-success {
+  background: var(--cream);
+  border-left: 3px solid var(--terracotta);
+  padding: 2.5rem 2rem;
+  min-height: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.contact-form-success h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  color: var(--terracotta);
+  margin-bottom: 0.75rem;
+}
+.contact-form-success p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  line-height: 1.8;
+  color: var(--text);
+  max-width: 680px;
+}
 
 /* ── FOOTER ── */
 #footer {
