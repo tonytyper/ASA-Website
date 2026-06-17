@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="28" viewBox="0 0 200 28" fill="none">
+  <!-- Armenian-inspired interlace (guilloche) border, seamlessly tileable -->
+  <g stroke="#C24535" stroke-width="1.4" fill="none" stroke-linecap="round">
+    <!-- thin framing rules, top & bottom -->
+    <path d="M0 3 H200" opacity="0.3"/>
+    <path d="M0 25 H200" opacity="0.3"/>
+
+    <!-- two woven strands forming an Armenian braid -->
+    <path d="M0 14 Q12.5 -1 25 14 Q37.5 29 50 14 Q62.5 -1 75 14 Q87.5 29 100 14 Q112.5 -1 125 14 Q137.5 29 150 14 Q162.5 -1 175 14 Q187.5 29 200 14"/>
+    <path d="M0 14 Q12.5 29 25 14 Q37.5 -1 50 14 Q62.5 29 75 14 Q87.5 -1 100 14 Q112.5 29 125 14 Q137.5 -1 150 14 Q162.5 29 175 14 Q187.5 -1 200 14"/>
+  </g>
+
+  <!-- diamond accents centered in each woven 'eye' -->
+  <g fill="#C24535">
+    <path d="M12.5 10 L15.5 14 L12.5 18 L9.5 14 Z"/>
+    <path d="M37.5 10 L40.5 14 L37.5 18 L34.5 14 Z"/>
+    <path d="M62.5 10 L65.5 14 L62.5 18 L59.5 14 Z"/>
+    <path d="M87.5 10 L90.5 14 L87.5 18 L84.5 14 Z"/>
+    <path d="M112.5 10 L115.5 14 L112.5 18 L109.5 14 Z"/>
+    <path d="M137.5 10 L140.5 14 L137.5 18 L134.5 14 Z"/>
+    <path d="M162.5 10 L165.5 14 L162.5 18 L159.5 14 Z"/>
+    <path d="M187.5 10 L190.5 14 L187.5 18 L184.5 14 Z"/>
+  </g>
+</svg>
