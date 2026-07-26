@@ -241,6 +241,7 @@ nav {
 
 .btn-outline {
   background: transparent;
+  cursor: pointer;
   color: var(--terracotta);
   padding: 0.8rem 2rem;
   font-family: 'Lato', sans-serif;
@@ -494,6 +495,145 @@ section { padding: 6rem 5%; }
 }
 
 .event-meta span { display: flex; align-items: center; gap: 0.35rem; }
+
+/* ── PAST EVENTS MODAL ── */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(var(--navy-rgb), 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 5vh 5vw;
+  animation: modalFade 0.25s ease both;
+}
+
+@keyframes modalFade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes modalRise {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: none; }
+}
+
+.modal {
+  background: var(--cream);
+  border: 1px solid rgba(var(--terracotta-rgb), 0.3);
+  border-top: 4px solid var(--terracotta);
+  box-shadow: 0 40px 90px rgba(0, 0, 0, 0.45);
+  width: 100%; max-width: 760px;
+  max-height: 88vh;
+  display: flex; flex-direction: column;
+  animation: modalRise 0.3s cubic-bezier(0.2, 0.8, 0.3, 1) both;
+}
+
+.modal-header {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  gap: 1rem;
+  padding: 1.75rem 2rem 1.25rem;
+  border-bottom: 1px solid rgba(var(--terracotta-rgb), 0.2);
+}
+
+.modal-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.1;
+}
+.modal-title em { font-style: italic; color: var(--terracotta); }
+
+.modal-close {
+  background: none; border: none; cursor: pointer;
+  font-size: 1.9rem; line-height: 1;
+  color: var(--muted);
+  padding: 0 0.35rem;
+  transition: color 0.2s;
+}
+.modal-close:hover { color: var(--terracotta); }
+
+.modal-body {
+  overflow-y: auto;
+  padding: 1.5rem 2rem 2rem;
+}
+
+.past-list { list-style: none; display: flex; flex-direction: column; gap: 1.4rem; }
+
+.past-item {
+  display: flex; gap: 1.25rem;
+  padding-bottom: 1.4rem;
+  border-bottom: 1px solid rgba(var(--terracotta-rgb), 0.15);
+}
+.past-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+.past-date {
+  flex: 0 0 70px;
+  align-self: flex-start;
+  text-align: center;
+  background: var(--navy);
+  padding: 0.6rem 0.4rem 0.5rem;
+}
+.past-month, .past-year {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(var(--cream-rgb), 0.6);
+}
+.past-day {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--terracotta);
+  line-height: 1.15;
+}
+
+.past-info { flex: 1; min-width: 0; }
+
+.past-name-row {
+  display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;
+  margin-bottom: 0.35rem;
+}
+.past-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--navy);
+}
+.past-tag {
+  background: rgba(var(--terracotta-rgb), 0.12);
+  color: var(--terracotta);
+  border: 1px solid rgba(var(--terracotta-rgb), 0.3);
+  padding: 0.15rem 0.6rem;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.past-desc {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.02rem;
+  color: var(--text);
+  line-height: 1.55;
+  margin-bottom: 0.4rem;
+}
+
+.past-meta {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+@media (max-width: 560px) {
+  .modal-overlay { padding: 0; align-items: stretch; }
+  .modal { max-width: none; max-height: 100vh; }
+  .modal-header { padding: 1.25rem 1.25rem 1rem; }
+  .modal-body { padding: 1.25rem; }
+  .past-item { gap: 0.9rem; }
+  .past-date { flex-basis: 58px; }
+}
 
 /* ── OFFICERS ── */
 #officers {
