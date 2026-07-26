@@ -24,7 +24,7 @@ export default function About() {
                                 <div className="stat-label">Years Active</div>
                             </div>
                             <div className="stat-card">
-                                <div className="stat-num">100+</div>
+                                <div className="stat-num">60+</div>
                                 <div className="stat-label">Members</div>
                             </div>
                             <div className="stat-card">

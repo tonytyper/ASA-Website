@@ -10,7 +10,12 @@
     --text: #195265;
     --muted: #996A39;
     /* raw channel values for rgba() usage */
+    /* hero display reds, lifted from the collage */
+    --clay: #E2694B;
+    --ember: #F0895F;
+    --brick: #A63D28;
     --navy-rgb: 15, 80, 102;
+    --brick-rgb: 166, 61, 40;
     --terracotta-rgb: 194, 69, 53;
     --cream-rgb: 241, 229, 207;
 }
@@ -44,12 +49,12 @@ body {
 /* ── NAV ── */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: rgba(var(--navy-rgb), 0.97);
+  background: rgba(var(--brick-rgb), 0.97);
   backdrop-filter: blur(8px);
   padding: 0 5%;
   display: flex; align-items: center; justify-content: space-between;
   height: 64px;
-  border-bottom: 2px solid var(--terracotta);
+  border-bottom: 2px solid var(--parchment);
 }
 
 .nav-logo {
@@ -66,7 +71,7 @@ nav {
   width: auto;
   height: 44px;
 }
-.nav-logo:hover .nav-logo-text { color: var(--terracotta); }
+.nav-logo:hover .nav-logo-text { color: var(--parchment); }
 
 .nav-links { display: flex; gap: 2rem; list-style: none; }
 .nav-links a {
@@ -79,7 +84,7 @@ nav {
   text-decoration: none;
   transition: color 0.2s;
 }
-.nav-links a:hover { color: var(--terracotta); }
+.nav-links a:hover { color: var(--parchment); }
 
 .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
 .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--cream); transition: 0.3s; }
@@ -95,13 +100,53 @@ nav {
   overflow: hidden;
 }
 
+/* Full-bleed background photo */
+.hero-bg {
+  position: absolute; inset: 0;
+  z-index: 0;
+}
+.hero-bg img {
+  object-fit: cover;
+  object-position: center;
+}
+
 /* Armenian knotwork corner decorations */
 #hero::before {
   content: '';
   position: absolute; inset: 0;
+  z-index: 1;
   background-image:
     radial-gradient(ellipse 60% 50% at 50% 50%, rgba(var(--terracotta-rgb), 0.08) 0%, transparent 70%);
   pointer-events: none;
+}
+
+/* Frosted panel — tinted from the collage's own reds so it settles into the photo.
+   The tint lives on ::before so the feathered edge never clips the text. */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  display: flex; flex-direction: column; align-items: center;
+  max-width: 720px;
+  padding: 3.5rem 3rem 3rem;
+}
+
+.hero-content::before {
+  content: '';
+  position: absolute;
+  inset: -2.5rem;
+  z-index: -1;
+  background: rgba(58, 20, 17, 0.72);
+  backdrop-filter: blur(22px) saturate(1.05);
+  -webkit-backdrop-filter: blur(22px) saturate(1.05);
+  /* farthest-corner sizing: the fade hits zero well before every edge */
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 26%, transparent 72%);
+  mask-image: radial-gradient(ellipse at center, #000 26%, transparent 72%);
+  pointer-events: none;
+}
+
+@media (max-width: 560px) {
+  .hero-content { padding: 2.5rem 1.5rem 2rem; }
+  .hero-content::before { inset: -1.5rem; }
 }
 
 .hero-ornament {
@@ -141,8 +186,9 @@ nav {
   font-weight: 700;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--terracotta);
+  color: var(--parchment);
   margin-bottom: 1rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
   animation: fadeUp 0.8s ease both 0.2s;
 }
 
@@ -150,24 +196,26 @@ nav {
   font-family: 'Playfair Display', serif;
   font-size: clamp(2.4rem, 6vw, 4.5rem);
   font-weight: 700;
-  color: var(--);
+  color: var(--clay);
   line-height: 1.1;
   margin-bottom: 0.4rem;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.45);
   animation: fadeUp 0.8s ease both 0.4s;
 }
 
 .hero-title em {
   font-style: italic;
-  color: var(--terracotta);
+  color: var(--ember);
 }
 
 .hero-sub {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(1rem, 2vw, 1.35rem);
+  font-size: clamp(0.88rem, 1.6vw, 1.1rem);
   font-weight: 300;
-  color: rgba(var(--), 0.6);
-  letter-spacing: 0.08em;
+  color: rgba(var(--cream-rgb), 0.95);
+  letter-spacing: 0.06em;
   margin-bottom: 2.5rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
   animation: fadeUp 0.8s ease both 0.6s;
 }
 
