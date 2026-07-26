@@ -47,12 +47,12 @@ export default function About() {
                                 style={{ objectFit: "cover" }}
                             />
                         </div>
-                        <div className="about-tag">Est. 2001 at UNLV</div>
+                        <div className="about-tag">Est. 1996 at UNLV</div>
                     </div>
                 </div>
             </section>
 
-            <div className="ornament-border"></div>
+            <div className="ornament-border ornament-border--about-events"></div>
         </>
     );
 }

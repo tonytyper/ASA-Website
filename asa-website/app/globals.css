@@ -36,15 +36,25 @@ body {
   overflow-x: hidden;
 }
 
-/* ── ORNAMENT SVG pattern ── */
+/* ── ORNAMENT SVG pattern ──
+   Each divider sits between two differently-colored sections. The
+   gradient layer blends section-color to section-color so the strip
+   reads as a seam, not an inserted cream block; the pattern rides on
+   top of it. Modifier classes below set which two colors it blends. */
 .ornament-border {
   width: 100%;
-  height: 28px;
-  background-image: url("/picsvg_modified.svg");
-  background-repeat: repeat-x;
-  background-size: 200px 28px;
+  height: 16px;
+  --ornament-gradient: none;
+  background-image: var(--ornament-gradient), url("/taraz-border.svg");
+  background-repeat: no-repeat, repeat-x;
+  background-size: 100% 100%, 17px 16px;
   opacity: 0.85;
 }
+
+.ornament-border--hero-about { --ornament-gradient: linear-gradient(to bottom, var(--cream), var(--parchment)); }
+.ornament-border--about-events { --ornament-gradient: linear-gradient(to bottom, var(--parchment), var(--cream)); }
+.ornament-border--events-officers { --ornament-gradient: linear-gradient(to bottom, var(--cream), var(--navy)); }
+.ornament-border--officers-contact { --ornament-gradient: linear-gradient(to bottom, var(--navy), var(--parchment)); }
 
 /* ── NAV ── */
 nav {

@@ -60,7 +60,7 @@ export default function Officers(){
           </div>
         </section>
 
-        <div className="ornament-border"></div>
+        <div className="ornament-border ornament-border--officers-contact"></div>
       </>
     )
 }

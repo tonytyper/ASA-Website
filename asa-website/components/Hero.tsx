@@ -39,7 +39,7 @@ export default function Hero() {
         </div>
       </section>
 
-      <div className="ornament-border"></div>
+      <div className="ornament-border ornament-border--hero-about"></div>
     </>
   );
 }

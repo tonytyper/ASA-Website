@@ -189,7 +189,7 @@ export default function Events() {
         </div>
       )}
 
-      <div className="ornament-border"></div>
+      <div className="ornament-border ornament-border--events-officers"></div>
     </>
   );
 }
