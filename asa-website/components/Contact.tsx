@@ -6,6 +6,7 @@ export default function Contact() {
   const [submitted, setSubmitted] = useState(false)
 
   return (
+    <>
     <section id="contact">
       <div className="contact-grid">
         <div>
@@ -93,5 +94,8 @@ export default function Contact() {
         </div>
       </div>
     </section>
+
+    <div className="ornament-border ornament-border--contact-footer"></div>
+    </>
   );
 }

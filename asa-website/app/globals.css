@@ -18,6 +18,8 @@
     --brick-rgb: 166, 61, 40;
     --terracotta-rgb: 194, 69, 53;
     --cream-rgb: 241, 229, 207;
+    /* deep red pulled from the collage; hero's ground + its outgoing seam */
+    --hero-base: #8C3324;
 }
 
 html { scroll-behavior: smooth; }
@@ -42,19 +44,57 @@ body {
    reads as a seam, not an inserted cream block; the pattern rides on
    top of it. Modifier classes below set which two colors it blends. */
 .ornament-border {
+  position: relative;
   width: 100%;
   height: 16px;
   --ornament-gradient: none;
-  background-image: var(--ornament-gradient), url("/taraz-border.svg");
-  background-repeat: no-repeat, repeat-x;
-  background-size: 100% 100%, 17px 16px;
+  /* Gradient is the element's own background so it stays fully opaque and
+     matches the neighbouring section colours exactly. The pattern rides on
+     ::before instead of a second background layer — as a layer it would sit
+     UNDER the gradient (first background-image paints on top) and vanish. */
+  background-image: var(--ornament-gradient);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+/* The SVG is used as a MASK, not an image, so background-color drives the
+   ink colour — that lets each divider pick a colour that reads against the
+   two sections it spans. */
+.ornament-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: var(--ornament-color, #C24535);
+  /* optional gradient ink, for seams whose two sections sit at opposite
+     ends of the value scale (see --events-officers) */
+  background-image: var(--ornament-ink, none);
+  -webkit-mask-image: url("/taraz-border.svg");
+  mask-image: url("/taraz-border.svg");
+  -webkit-mask-repeat: repeat-x;
+  mask-repeat: repeat-x;
+  -webkit-mask-size: 17px 16px;
+  mask-size: 17px 16px;
   opacity: 0.85;
 }
 
-.ornament-border--hero-about { --ornament-gradient: linear-gradient(to bottom, var(--cream), var(--parchment)); }
+/* hero fades out of the collage's reds, not white */
+.ornament-border--hero-about { --ornament-gradient: linear-gradient(to bottom, var(--hero-base), var(--parchment)); --ornament-color: var(--cream);}
 .ornament-border--about-events { --ornament-gradient: linear-gradient(to bottom, var(--parchment), var(--cream)); }
-.ornament-border--events-officers { --ornament-gradient: linear-gradient(to bottom, var(--cream), var(--navy)); }
-.ornament-border--officers-contact { --ornament-gradient: linear-gradient(to bottom, var(--navy), var(--parchment)); }
+/* cream -> navy spans the full value scale, so no single ink reads well on
+   both halves (contrast against one is always traded against the other).
+   The ink inverts the background instead: navy over the cream half, cream
+   over the navy half — ~7:1 on each, versus ~2.7:1 for any flat colour. */
+.ornament-border--events-officers {
+  --ornament-gradient: linear-gradient(to bottom, var(--cream), var(--navy));
+  --ornament-ink: linear-gradient(to bottom, var(--navy) 44%, var(--cream) 56%);
+}
+/* navy -> parchment: cream separates from both; terracotta clashes with parchment */
+.ornament-border--officers-contact {
+  --ornament-gradient: linear-gradient(to bottom, var(--navy), var(--parchment));
+  --ornament-color: var(--cream);
+}
+/* contact and footer are both parchment, so this seam is a flat ground */
+.ornament-border--contact-footer { --ornament-gradient: linear-gradient(to bottom, var(--parchment), var(--parchment)); }
 
 /* ── NAV ── */
 nav {
@@ -102,7 +142,7 @@ nav {
 /* ── HERO ── */
 #hero {
   min-height: 100vh;
-  background: var(--cream);
+  background: var(--hero-base);
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   text-align: center;
   padding: 100px 5% 60px;
@@ -349,12 +389,6 @@ section { padding: 6rem 5%; }
 #about {
   background: var(--parchment);
   position: relative;
-}
-#about::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, transparent, var(--terracotta), transparent);
 }
 
 .about-grid {
@@ -967,3 +1001,4 @@ footer {
   .form-row { grid-template-columns: 1fr; }
   .officer-card { flex-basis: 160px; }
 }
+
