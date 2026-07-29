@@ -11,7 +11,7 @@ export default function Contact() {
       <div className="contact-grid">
         <div>
           <p className="section-label">Get Involved</p>
-          <h2 className="section-title">Join Our <em>Community</em></h2>
+          <h2 className="section-title">Join Our <em>Organization</em></h2>
           <div className="divider"></div>
           <p className="section-body">
             Whether you're looking to connect with Armenian culture, find community, or build your professional network — we'd love to have you. Fill out the form or reach us directly.
