@@ -15,12 +15,13 @@ export default function Navbar() {
                 width={379}
                 height={384}
             />
-            <span className="nav-logo-text">ASA of UNLV</span>
+            <span className="nav-logo-text">Armenian Student Association of UNLV</span>
         </a>
         <ul className={isOpen ? "nav-links open" : "nav-links"} id="navLinks">
             <li><a href="#about">About</a></li>
             <li><a href="#events">Events</a></li>
             <li><a href="#officers">Officers</a></li>
+            <li><a href="#donate">Donate</a></li>
             <li><a href="#contact">Join Us</a></li>
         </ul>
         <div className="nav-toggle" onClick={() => setIsOpen(!isOpen)}>
