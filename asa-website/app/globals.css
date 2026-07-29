@@ -763,11 +763,24 @@ section { padding: 6rem 5%; }
   gap: 1.5rem;
 }
 
+/* a <button> so the card is keyboard-reachable; these reset the UA styles */
 .officer-card {
   flex: 0 0 196px;
   border: 1px solid rgba(184,92,56,0.25);
   overflow: hidden;
   transition: transform 0.25s, border-color 0.25s;
+  padding: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  display: block;
+}
+
+.officer-card:focus-visible {
+  outline: 2px solid var(--terracotta);
+  outline-offset: 3px;
 }
 
 .officer-card:hover { transform: translateY(-4px); border-color: var(--terracotta); }
@@ -819,6 +832,75 @@ section { padding: 6rem 5%; }
   font-weight: 700;
   letter-spacing: 0.12em;
   color: var(--cream);
+}
+
+/* ── OFFICER MODAL ──
+   Reuses .modal-overlay / .modal from the past-events modal; only the
+   inner layout is officer-specific. */
+.officer-modal {
+  position: relative;
+  max-width: 700px;
+}
+
+.officer-modal-close {
+  position: absolute;
+  top: 0.5rem; right: 0.9rem;
+  z-index: 2;
+}
+
+.officer-modal-body {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 2rem;
+  padding: 2.25rem 2rem 2rem;
+  overflow-y: auto;
+}
+
+.officer-modal-photo {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: linear-gradient(135deg, #1a6880, var(--navy));
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid rgba(var(--terracotta-rgb), 0.25);
+}
+/* the shared .officer-initials is absolutely positioned for the card;
+   inside the modal it should just sit in the middle */
+.officer-modal-photo .officer-initials {
+  position: static;
+  font-size: 3rem;
+  color: rgba(245, 240, 232, 0.25);
+}
+
+.officer-modal-info { min-width: 0; }
+
+.officer-modal-info .modal-title { margin-bottom: 0.25rem; }
+
+.officer-modal-academics {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  margin: 0.6rem 0 1.15rem;
+  padding-bottom: 1.15rem;
+  border-bottom: 1px solid rgba(var(--terracotta-rgb), 0.2);
+}
+
+.officer-modal-bio {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.08rem;
+  line-height: 1.65;
+  color: var(--text);
+}
+
+@media (max-width: 680px) {
+  .officer-modal-body {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    padding: 2rem 1.25rem 1.5rem;
+  }
+  .officer-modal-photo { max-width: 220px; }
 }
 
 /* ── CONTACT ── */
@@ -1038,6 +1120,8 @@ footer {
   .form-row { grid-template-columns: 1fr; }
   .officer-card { flex-basis: 160px; }
 }
+
+
 
 
 
