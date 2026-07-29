@@ -20,7 +20,7 @@ export default function About() {
 
                         <div className="about-stats">
                             <div className="stat-card">
-                                <div className="stat-num">25+</div>
+                                <div className="stat-num">30+</div>
                                 <div className="stat-label">Years Active</div>
                             </div>
                             <div className="stat-card">
