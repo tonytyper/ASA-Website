@@ -801,12 +801,6 @@ section { padding: 6rem 5%; }
   overflow: hidden;
 }
 
-.officer-avatar::after {
-  content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(to bottom, transparent 50%, rgba(28,43,74,0.9));
-}
-
 .officer-initials {
   position: absolute; bottom: 0.75rem; left: 0; right: 0;
   font-family: 'Playfair Display', serif;
@@ -1234,15 +1228,3 @@ footer {
   .form-row { grid-template-columns: 1fr; }
   .officer-card { flex-basis: 160px; }
 }
-
-
-
-
-
-
-
-
-
-
-
-
