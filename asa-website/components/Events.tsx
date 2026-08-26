@@ -2,13 +2,11 @@
 
 import { useEffect, useState } from 'react'
 
-// PLACEHOLDER DATA — swap these for the real archive.
 const pastEvents = [
   {
     day: "1",
     month: "June",
     year: "2026",
-    tag: "Community Service",
     name: "Children's Day Toy Drive",
     desc: "In honor of Armenia’s Children’s Protection Day on June 1st, we successfully distributed our second batch of donation boxes to these wonderful children. Bringing joy to their lives is deeply fulfilling, and we extend our sincere gratitude to everyone who donated.",
     meta: "Yerevan, Armenia",
@@ -17,7 +15,6 @@ const pastEvents = [
     day: "24",
     month: "April",
     year: "2026",
-    tag: "Memorial",
     name: "Armenian Genocide Rememberance Day 2026",
     desc: "A commemorative ceremony honoring the 1.5 million lives lost in the Armenian Genocide.",
     meta: "Armenian Genocide Memorial Monument, Sunset Park",
@@ -26,7 +23,6 @@ const pastEvents = [
     day: "20",
     month: "April",
     year: "2026",
-    tag: "Social",
     name: "Last General Meeting",
     desc: "The final meeting of the Spring Semester, saying goodbye with food and games",
     meta: "Student Union Room 219",
@@ -35,7 +31,6 @@ const pastEvents = [
     day: "15",
     month: "April",
     year: "2026",
-    tag: "Discussion",
     name: "The Armenian Genocide & The Holocaust In Historical Context",
     desc: "The UNLV President’s Office and College of Liberal Arts have organized a discussion panel where they are flying out scholars such as Bedross Der Matossian to bring light to the Armenian Genocide.",
     meta: "Greenspun Hall, UNLV",
@@ -44,7 +39,6 @@ const pastEvents = [
     day: "28",
     month: "March",
     year: "2026",
-    tag: "Community Service",
     name: "Easter Egg Painting",
     desc: "Join us for egg painting with the ARS Shoushi Chapter Vergine Koujakian Saturday School kids at St. Garabed!",
     meta: "St. Garabed Armenian Apostolic Church of Las Vegas",
@@ -95,7 +89,6 @@ export default function Events() {
             <div className="event-card-top">
               <div className="event-month">April</div>
               <div className="event-date">24</div>
-              <div className="event-tag">Memorial</div>
             </div>
             <div className="event-card-body">
               <div className="event-name">Armenian Genocide Remembrance Day</div>
@@ -111,7 +104,6 @@ export default function Events() {
             <div className="event-card-top">
               <div className="event-month">Spring</div>
               <div className="event-date">TBD</div>
-              <div className="event-tag">Cultural</div>
             </div>
             <div className="event-card-body">
               <div className="event-name">Armenian Culture Night</div>
@@ -127,7 +119,6 @@ export default function Events() {
             <div className="event-card-top">
               <div className="event-month">Ongoing</div>
               <div className="event-date">★</div>
-              <div className="event-tag">Program</div>
             </div>
             <div className="event-card-body">
               <div className="event-name">Peer Mentor Program</div>
@@ -176,7 +167,6 @@ export default function Events() {
                     <div className="past-info">
                       <div className="past-name-row">
                         <span className="past-name">{event.name}</span>
-                        <span className="past-tag">{event.tag}</span>
                       </div>
                       <p className="past-desc">{event.desc}</p>
                       <div className="past-meta">{event.meta}</div>
