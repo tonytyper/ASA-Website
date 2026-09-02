@@ -186,7 +186,7 @@ export default function Officers() {
         </div>
       )}
 
-      <div className="ornament-border ornament-border--officers-donate"></div>
+      <div className="ornament-border ornament-border--officers-gallery"></div>
     </>
   )
 }

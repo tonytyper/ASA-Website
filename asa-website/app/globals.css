@@ -88,11 +88,15 @@ body {
   --ornament-gradient: linear-gradient(to bottom, var(--cream), var(--navy));
   --ornament-ink: linear-gradient(to bottom, var(--navy) 44%, var(--cream) 56%);
 }
-/* navy -> cream: same full-value-scale problem as events-officers, so the
-   ink inverts the background again (cream over navy, navy over cream) */
-.ornament-border--officers-donate {
-  --ornament-gradient: linear-gradient(to bottom, var(--navy), var(--cream));
+/* navy -> parchment: same full-value-scale problem as events-officers, so the
+   ink inverts the background again (cream over navy, navy over parchment) */
+.ornament-border--officers-gallery {
+  --ornament-gradient: linear-gradient(to bottom, var(--navy), var(--parchment));
   --ornament-ink: linear-gradient(to bottom, var(--cream) 44%, var(--navy) 56%);
+}
+/* parchment -> cream: both light and warm, so the default terracotta reads */
+.ornament-border--gallery-donate {
+  --ornament-gradient: linear-gradient(to bottom, var(--parchment), var(--cream));
 }
 /* cream -> parchment: both light and warm, so the default terracotta reads */
 .ornament-border--donate-contact {
@@ -878,8 +882,34 @@ section { padding: 6rem 5%; }
   .officer-modal-photo { max-width: 220px; }
 }
 
+/* ── GALLERY ──
+   Parchment steps the value scale down from navy officers to cream donate. */
+#gallery {
+  background: var(--parchment);
+  position: relative;
+}
+
+.gallery-header { max-width: 1100px; margin: 0 auto 3rem; }
+
+.gallery-grid {
+  max-width: 1100px; margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.gallery-item {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border: 1px solid rgba(var(--terracotta-rgb), 0.2);
+  overflow: hidden;
+}
+
+/* placeholder tile: holds the grid's shape until real photos land */
+.gallery-item--empty { background: rgba(var(--cream-rgb), 0.35); }
+
 /* ── DONATE ──
-   Cream: distinct from both neighbours (navy above, parchment below) and
+   Cream: distinct from both neighbours (parchment above and below) and
    it keeps the brick nav bar readable when scrolled over it. */
 #donate {
   background: var(--cream);

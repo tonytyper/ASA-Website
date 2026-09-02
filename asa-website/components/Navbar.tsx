@@ -21,6 +21,7 @@ export default function Navbar() {
             <li><a href="#about">About</a></li>
             <li><a href="#events">Events</a></li>
             <li><a href="#officers">Officers</a></li>
+            <li><a href="#gallery">Gallery</a></li>
             <li><a href="#donate">Donate</a></li>
             <li><a href="#contact">Join Us</a></li>
         </ul>
