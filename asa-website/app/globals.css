@@ -1009,6 +1009,53 @@ section { padding: 6rem 5%; }
   color: var(--cream);
 }
 
+/* Two payment paths side by side. Venmo refuses to start a transaction from
+   its website, so the button carries phones (where the URL opens the app) and
+   the QR carries desktops (scanned by the donor's phone). */
+.donate-methods-label {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  margin: 0;
+}
+
+.donate-methods {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.donate-method {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+  max-width: 15rem;
+}
+
+.donate-method-caption {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  letter-spacing: 0.03em;
+  color: var(--muted);
+  margin: 0;
+}
+.donate-method-caption strong { color: var(--terracotta); }
+
+/* Sized so the individual modules stay coarse enough for a phone camera to
+   resolve at arm's length from a monitor. */
+.donate-qr {
+  width: 9.5rem;
+  height: 9.5rem;
+  border: 1px solid rgba(var(--terracotta-rgb), 0.45);
+}
+/* Navy on cream measures ~7.6:1, far above the contrast a scanner needs. */
+.donate-qr-quiet { fill: var(--cream); }
+.donate-qr-modules { fill: var(--navy); }
+
 .donate-note {
   font-family: 'Lato', sans-serif;
   font-size: 0.78rem;
