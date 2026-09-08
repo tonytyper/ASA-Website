@@ -32,6 +32,8 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+# the template carries no secrets and is how a new clone learns what to set
+!.env.example
 
 # vercel
 .vercel
@@ -42,3 +44,5 @@ next-env.d.ts
 
 #claude
 .claude/
+# gallery photos staged for `npm run gallery:ingest`; the bucket is the store, not git
+/gallery-staging
