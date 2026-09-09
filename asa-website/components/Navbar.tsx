@@ -10,10 +10,10 @@ export default function Navbar() {
     <nav>
         <a href="#hero" className="nav-logo">
             <Image
-                src="/ASA_logo.png"
+                src="/asa-logo.png"
                 alt="Armenian Student Association at UNLV logo"
-                width={379}
-                height={384}
+                width={640}
+                height={640}
             />
             <span className="nav-logo-text">Armenian Student Association of UNLV</span>
         </a>

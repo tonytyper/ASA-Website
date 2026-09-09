@@ -17,10 +17,10 @@ export default function Hero() {
         <div className="hero-content">
           <div className="hero-seal">
             <Image
-              src="/ASA_logo.png"
+              src="/asa-logo.png"
               alt="Armenian Student Association at UNLV logo"
-              width={379}
-              height={384}
+              width={640}
+              height={640}
               priority
             />
           </div>
