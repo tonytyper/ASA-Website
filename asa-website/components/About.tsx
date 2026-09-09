@@ -6,7 +6,6 @@ export default function About() {
             <section id="about">
                 <div className="about-grid">
                     <div>
-                        <p className="section-label">Who We Are</p>
                         <h2 className="section-title">
                             A Home Away<br />from <em>Home</em>
                         </h2>
@@ -30,10 +29,6 @@ export default function About() {
                             <div className="stat-card">
                                 <div className="stat-num">10+</div>
                                 <div className="stat-label">Annual Events</div>
-                            </div>
-                            <div className="stat-card">
-                                <div className="stat-num">3</div>
-                                <div className="stat-label">Mentor Tracks</div>
                             </div>
                         </div>
                     </div>

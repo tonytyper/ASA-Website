@@ -78,7 +78,6 @@ export default function Officers() {
     <>
       <section id="officers">
         <div className="officers-header">
-          <p className="section-label">Leadership</p>
           <h2 className="section-title">Meet Our <em>Officers</em></h2>
           <div className="divider"></div>
         </div>

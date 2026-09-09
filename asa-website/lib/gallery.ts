@@ -99,7 +99,7 @@ export async function getGalleryAlbums(): Promise<GalleryAlbum[]> {
         blurDataURL: photo.blur_data_url,
         // Ingest fills `alt` from the album's sidecar file when the officers
         // wrote one; the album title is the honest fallback.
-        alt: photo.alt ?? `${album.title} — Armenian Student Association at UNLV`,
+        alt: photo.alt ?? `${album.title}, Armenian Student Association at UNLV`,
         width: photo.width,
         height: photo.height,
       })),

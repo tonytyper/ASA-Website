@@ -11,8 +11,7 @@ export default async function Gallery() {
     <>
       <section id="gallery">
         <div className="gallery-header">
-          <p className="section-label">Gallery</p>
-          <h2 className="section-title">Moments Over The <em>Years</em></h2>
+          <h2 className="section-title">ASA over the <em>Years</em></h2>
           <div className="divider"></div>
         </div>
 

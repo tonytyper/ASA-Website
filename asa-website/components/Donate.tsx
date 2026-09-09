@@ -67,7 +67,7 @@ function qrCodePath(text: string) {
 const supports = [
   {
     title: "Cultural Events",
-    desc: "Culture Night, Genocide Remembrance, and the gatherings that keep our traditions alive on campus.",
+    desc: "General Meetings, Outdoor Events, and the gatherings that keep our traditions alive on campus.",
   },
   {
     title: "Community Outreach",
@@ -90,10 +90,9 @@ export default function Donate() {
       <section id="donate">
         <div className="donate-inner">
           {/* The header lives inside the grid's left column so the cards on
-              the right start level with "Support Us", not below the title. */}
+              the right start level with the heading, not below it. */}
           <div className="donate-grid">
             <div>
-              <p className="section-label">Support Us</p>
               <h2 className="section-title">Support Our <em>Community</em></h2>
               <div className="divider"></div>
 
@@ -119,10 +118,6 @@ export default function Donate() {
                   ))}
                 </div>
 
-                <p className="donate-methods-label">
-                  Two ways to give — use whichever suits the device you&apos;re on.
-                </p>
-
                 <div className="donate-methods">
                   <div className="donate-method">
                     <a
@@ -134,8 +129,7 @@ export default function Donate() {
                       Donate on Venmo
                     </a>
                     <p className="donate-method-caption">
-                      <strong>On your phone</strong> — opens the Venmo app with
-                      the note already filled in.
+                      <strong>Opens in browser</strong>
                     </p>
                   </div>
 
@@ -160,8 +154,7 @@ export default function Donate() {
                       <path className="donate-qr-modules" d={qr.path} />
                     </svg>
                     <p className="donate-method-caption">
-                      <strong>On a computer</strong> — scan it with your
-                      phone&apos;s camera, then enter any amount.
+                      <strong>Opens in app</strong>
                     </p>
                   </div>
                 </div>

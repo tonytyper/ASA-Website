@@ -87,7 +87,7 @@ export default function GalleryAlbums({ albums }: { albums: GalleryAlbum[] }) {
               className="gallery-card"
               key={album.id}
               onClick={() => setOpenAlbum(album)}
-              aria-label={`Open ${album.title} — ${album.photos.length} photos`}
+              aria-label={`Open ${album.title}, ${album.photos.length} photos`}
             >
               <div className="gallery-card-media">
                 <Image

@@ -20,6 +20,9 @@
     --cream-rgb: 241, 229, 207;
     /* deep red pulled from the collage; hero's ground + its outgoing seam */
     --hero-base: #8C3324;
+    /* The nav is fixed, so sections offset their scroll position by its
+       height. Declared once so the two cannot drift apart. */
+    --nav-height: 64px;
 }
 
 html { scroll-behavior: smooth; }
@@ -112,7 +115,7 @@ nav {
   backdrop-filter: blur(8px);
   padding: 0 5%;
   display: flex; align-items: center; justify-content: space-between;
-  height: 64px;
+  height: var(--nav-height);
   border-bottom: 2px solid var(--parchment);
 }
 
@@ -356,7 +359,12 @@ nav {
 @keyframes scrollPulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
 
 /* ── SECTIONS COMMON ── */
-section { padding: 6rem 5%; }
+section {
+  padding: 3.5rem 5% 6rem;
+  /* Without this the fixed nav would cover the heading of whichever
+     section a nav link jumps to. */
+  scroll-margin-top: var(--nav-height);
+}
 
 .section-label {
   font-family: 'Lato', sans-serif;
@@ -411,7 +419,9 @@ section { padding: 6rem 5%; }
 
 .about-stats {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  /* Sized to the content rather than a fixed count, so the row stays full
+     whether there are three stats or four and none is left stranded alone. */
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
   gap: 1.5rem;
   margin-top: 2.5rem;
 }

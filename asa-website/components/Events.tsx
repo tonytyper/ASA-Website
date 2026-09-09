@@ -71,7 +71,6 @@ export default function Events() {
       <section id="events">
         <div className="events-header">
           <div>
-            <p className="section-label">What&apos;s Happening</p>
             <h2 className="section-title">Upcoming <em>Events</em></h2>
           </div>
           <button
