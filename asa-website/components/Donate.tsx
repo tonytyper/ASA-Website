@@ -1,17 +1,25 @@
 import QRCode from "qrcode"
 
 // The association's Venmo account, stored without the leading "@" so it can
-// drop straight into the URL path. The display copy adds the "@" back.
-//
-// UNVERIFIED: venmo.com/asaofunlv1 does not resolve, so every link and the QR
-// below currently lead nowhere. Replace this with the username from the Venmo
-// app (Me -> Share Profile -> Copy link) and confirm the bare profile URL
-// loads before shipping. A wrong handle fails silently — the buttons still
-// look fine and donations simply never arrive.
-const VENMO_HANDLE = "asaofunlv1"
+// drop straight into the URL path. The display copy adds the "@" back. Confirm
+// any edit against the Venmo app before shipping: a wrong handle fails
+// silently, since the buttons still look fine and the donation simply never
+// arrives.
+const VENMO_HANDLE = "asaofunlv01"
 
-const NOTE = "Donation to ASA at UNLV"
+// The donor can edit the note in the app, so the placeholder doubles as the
+// prompt asking them to sign it — an unedited note still reads sensibly.
+const NOTE = "Donation to ASA from [enter name]!"
 const PRESET_AMOUNTS = [5, 10, 20]
+
+// Spaces cannot survive the trip to the Venmo app. account.venmo.com answers
+// with a 307 to a venmo://paycharge link and rebuilds the query as it goes,
+// turning any space into "+" whether we sent "%20" or "+"; the app then
+// percent-decodes only, so that "+" lands on the payment screen as a literal
+// character. U+00A0 is left alone by that rewrite and renders at the same
+// width. Verified against Venmo: "%20" and "+" both arrive as "+", while
+// "%C2%A0" arrives intact.
+const NBSP = "\u00A0"
 
 // Venmo's payment deep link. On mobile the URL is claimed by the Venmo app,
 // which opens with the recipient, note, and amount already filled in. Venmo
@@ -19,7 +27,7 @@ const PRESET_AMOUNTS = [5, 10, 20]
 // the same URL resolves to the profile and the donor finishes in the app —
 // the note under the buttons sets that expectation.
 function venmoUrl(amount?: number) {
-  const params = new URLSearchParams({ txn: "pay", note: NOTE })
+  const params = new URLSearchParams({ txn: "pay", note: NOTE.replaceAll(" ", NBSP) })
   // Venmo wants a bare decimal, no currency symbol.
   if (amount) params.set("amount", amount.toFixed(2))
   return `https://venmo.com/${VENMO_HANDLE}?${params.toString()}`
