@@ -508,7 +508,11 @@ section {
 .events-grid {
   max-width: 1100px; margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  /* auto-fit rather than auto-fill: when only one event is listed the empty
+     tracks collapse and the card spans the full width, instead of sitting
+     alone in a third of the row with dead space beside it. Two or three
+     events still divide the row evenly. */
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 2rem;
 }
 
@@ -524,28 +528,22 @@ section {
 
 .event-card-top {
   background: var(--navy);
-  padding: 1.5rem 1.5rem 1rem;
+  padding: 2.25rem 2rem;
   position: relative;
 }
 
+/* Month and day read as one line. It scales with the viewport because the
+   card is full width whenever a single event is listed, where a fixed size
+   would look lost against the navy band. */
 .event-date {
   font-family: 'Playfair Display', serif;
-  font-size: 2.5rem;
+  font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 700;
   color: var(--terracotta);
   line-height: 1;
 }
 
-.event-month {
-  font-family: 'Lato', sans-serif;
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(245,240,232,0.5);
-}
-
-.event-card-body { padding: 1.5rem; }
+.event-card-body { padding: 2rem; }
 
 .event-name {
   font-family: 'Playfair Display', serif;
@@ -561,6 +559,9 @@ section {
   color: var(--text);
   line-height: 1.6;
   margin-bottom: 1rem;
+  /* A full-width card would otherwise run this line past the point where the
+     eye can find the next one. */
+  max-width: 65ch;
 }
 
 .event-meta {
@@ -573,6 +574,23 @@ section {
 }
 
 .event-meta span { display: flex; align-items: center; gap: 0.35rem; }
+
+/* Details left, call to action right, both on one baseline. It wraps to two
+   rows on a narrow card rather than crushing the button. */
+.event-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem 1.5rem;
+}
+
+/* Slightly tighter than the page's primary buttons: this one sits inside a
+   card, not at the end of a section. */
+.event-more {
+  flex-shrink: 0;
+  padding: 0.65rem 1.6rem;
+}
 
 /* ── PAST EVENTS MODAL ── */
 .modal-overlay {

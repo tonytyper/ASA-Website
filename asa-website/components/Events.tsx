@@ -86,44 +86,27 @@ export default function Events() {
         <div className="events-grid">
           <div className="event-card">
             <div className="event-card-top">
-              <div className="event-month">April</div>
-              <div className="event-date">24</div>
+              <div className="event-date">September 9</div>
             </div>
             <div className="event-card-body">
-              <div className="event-name">Armenian Genocide Remembrance Day</div>
-              <p className="event-desc">A solemn and powerful commemorative ceremony honoring the 1.5 million lives lost in the Armenian Genocide of 1915.</p>
-              <div className="event-meta">
-                <span>🕯 On Campus</span>
-                <span>📅 April 24</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="event-card">
-            <div className="event-card-top">
-              <div className="event-month">Spring</div>
-              <div className="event-date">TBD</div>
-            </div>
-            <div className="event-card-body">
-              <div className="event-name">Armenian Culture Night</div>
-              <p className="event-desc">An evening celebrating Armenian music, dance, cuisine, and art. Open to all UNLV students and the Las Vegas Armenian community.</p>
-              <div className="event-meta">
-                <span>🎶 UNLV Campus</span>
-                <span>📅 Spring 2025</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="event-card">
-            <div className="event-card-top">
-              <div className="event-month">Ongoing</div>
-              <div className="event-date">★</div>
-            </div>
-            <div className="event-card-body">
-              <div className="event-name">Peer Mentor Program</div>
-              <p className="event-desc">Connect with mentors in Medical, Law, and Psychology fields. Meet at least three times a semester and build your professional network.</p>
-              <div className="event-meta">
-                <span>📚 Medical · Law · Psychology</span>
+              <div className="event-name">First General Meeting</div>
+              <p className="event-desc">Come and join us for our first meeting of the Spring semester, hang out, and enjoy Stephano&apos;s!</p>
+              {/* Meta and the call to action share a row so the button sits
+                  on the card's right edge, level with the details. */}
+              <div className="event-footer">
+                <div className="event-meta">
+                  <span>📍 BEH 110</span>
+                  <span>🕒 6-8pm</span>
+                </div>
+                <a
+                  className="btn-primary event-more"
+                  href="https://www.instagram.com/p/Dc4bCxHy0Br/?hl=en"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="More info about the First General Meeting on Instagram"
+                >
+                  More info
+                </a>
               </div>
             </div>
           </div>
