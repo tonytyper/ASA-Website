@@ -12,6 +12,11 @@ const nextConfig: NextConfig = {
     remotePatterns: supabaseUrl
       ? [new URL(`${supabaseUrl}/storage/v1/object/public/gallery/**`)]
       : [],
+    // Next 16 requires qualities to be allowlisted, so that a stray `q=` in a
+    // crafted URL cannot make the optimizer render arbitrary variants. 75 is
+    // the default used everywhere; 90 is reserved for a photo the visitor has
+    // deliberately opened full-screen, where compression artefacts show.
+    qualities: [75, 90],
   },
 };
 
