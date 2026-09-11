@@ -4,20 +4,24 @@ The official website for the Armenian Student Association (ASA) at the Universit
 
 **Live at [asaofunlv.com](https://asaofunlv.com)**
 
+![ASA of UNLV](public/preview.webp)
+
 ---
 
 ## About the Project
 
 I designed and built this site as a thank you to ASA for connecting me more with my roots and I wanted to help do the same for others. This project was made to give the organization a permanent home online to help replace a scattered presence across social media with a single place where students can learn who we are, see what's coming up, and get in touch.
 
-The design draws directly from Armenian visual tradition: the color palette was pulled from the Armenian flag as well as other cultural artifacts like our carpets and fruits (terracotta, navy, parchment, cream). You'll also see repeating knotwork ornamentation rendered as inline SVG, and bilingual typography that uses Armenian script alongside English.
+The design draws directly from Armenian tradition: the color palette was pulled from the Armenian flag as well as other cultural artifacts like our carpets and fruits (terracotta, navy, parchment, cream). You'll also see repeating knotwork ornamentation rendered as inline SVG, and bilingual typography that uses Armenian script alongside English.
 
 ## Features
 
-- **Single-page architecture** with smooth-scroll navigation across Hero, About, Events, Officers, and Contact sections
-- **Events showcase** covering recurring programming: General Events, Hikes, and other upcoming events localized in an accessible environment
-- **Officer directory** presenting the executive board and officer roles
-- **Contact section** for prospective members, linked to the organization's Instagram account
+- **Single-page architecture** with smooth-scroll navigation across Hero, About, Events, Officers, Gallery, Donate, and Join sections
+- **Photo gallery** with event photos sorted into albums by semester, pulled from Supabase Storage and served through Next.js image optimization
+- **Events showcase** covering recurring programming: general meetings, hikes, and other upcoming events with location and time details
+- **Officer directory** with a year toggle so you can switch between the current executive board and past ones
+- **Donation flow** built on Venmo deep links with preset amounts, plus a scannable QR code for anyone donating from a second device
+- **Membership form** collecting name, email, interest, and a message and routing them to ASA's official inbox, alongside direct links to Instagram and the UNLV Involvement Center
 - **Responsive layout** built mobile-first, with a collapsing navigation menu
 - **Custom design system** defined through CSS variables for consistent theming across the site
 
@@ -27,8 +31,9 @@ The design draws directly from Armenian visual tradition: the color palette was 
 |---|---|
 | Framework | Next.js 16.2.9 (App Router) |
 | UI | React 19.2.4 |
-| Language | TypeScript 5 (strict mode) |
+| Language | TypeScript 5 |
 | Styling | Tailwind CSS v4 |
+| Media | Supabase Storage with `next/image` optimization |
 | Hosting | Vercel |
 | DNS | GoDaddy, with a custom apex domain and `www` redirect |
 
@@ -47,8 +52,8 @@ Typography pairs **Playfair Display** and **Cormorant Garamond** for display and
 ## Running Locally
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/asa-website.git
-cd asa-website
+git clone https://github.com/tonytyper/ASA-Website.git
+cd ASA-Website
 npm install
 npm run dev
 ```
@@ -63,6 +68,7 @@ Open [http://localhost:3000](http://localhost:3000).
 | `npm run build` | Create a production build |
 | `npm run start` | Serve the production build |
 | `npm run lint` | Run ESLint |
+| `npm run gallery:ingest` | Process and upload gallery photos to Supabase |
 
 ## Deployment
 
