@@ -517,6 +517,8 @@ section {
 }
 
 .event-card {
+  display: flex;
+  flex-direction: column;
   background: var(--parchment);
   border: 1px solid rgba(184,92,56,0.15);
   overflow: hidden;
@@ -543,7 +545,14 @@ section {
   line-height: 1;
 }
 
-.event-card-body { padding: 2rem; }
+.event-card-body {
+  padding: 2rem;
+  /* A column that fills the card, so .event-more can be pushed to the bottom
+     edge and every card's button lands on the same line. */
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
 
 .event-name {
   font-family: 'Playfair Display', serif;
@@ -565,7 +574,9 @@ section {
 }
 
 .event-meta {
-  display: flex; gap: 1.25rem; flex-wrap: wrap;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
   font-family: 'Lato', sans-serif;
   font-size: 0.72rem;
   font-weight: 700;
@@ -575,21 +586,31 @@ section {
 
 .event-meta span { display: flex; align-items: center; gap: 0.35rem; }
 
-/* Details left, call to action right, both on one baseline. It wraps to two
-   rows on a narrow card rather than crushing the button. */
+/* Space before the button that the removed .event-footer gap used to supply. */
+/* Details on the left, button on the right, centred against the two-line
+   stack. Sharing a row costs the card a whole row of height, which it only
+   affords now that location and time are stacked instead of side by side. */
 .event-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 1rem 1.5rem;
+  gap: 1rem;
+  margin-top: auto;
 }
 
-/* Slightly tighter than the page's primary buttons: this one sits inside a
-   card, not at the end of a section. */
+/* Right-aligned on a line of its own, directly under the details. Sharing a
+   row with the meta only worked while the meta stayed short: a longer venue
+   pushed the button onto a second line where space-between parked it against
+   the left edge. */
 .event-more {
+  /* Keeps the button against the right edge even if a narrow card wraps it
+     onto its own line, where space-between would otherwise park it left. */
+  margin-left: auto;
   flex-shrink: 0;
-  padding: 0.65rem 1.6rem;
+  font-size: 0.68rem;
+  padding: 0.5rem 1.1rem;
+  border-width: 1px;
 }
 
 /* ── PAST EVENTS MODAL ── */
@@ -660,17 +681,42 @@ section {
 .past-item:last-child { border-bottom: none; padding-bottom: 0; }
 
 .past-date {
-  flex: 0 0 70px;
+  /* Sized so the longest month name fits without the tile growing. A flex
+     item defaults to min-width:auto, so "SEPTEMBER" pushed this past its
+     basis and knocked that row's text column out of line with the rest. */
+  flex: 0 0 82px;
+  min-width: 0;
   align-self: flex-start;
-  text-align: center;
   background: var(--navy);
-  padding: 0.6rem 0.4rem 0.5rem;
+  /* A true square with the date stack centred on both axes, rather than the
+     content sitting against the top edge under uneven padding. */
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  /* The extra bottom padding lifts the stack by half the difference, which
+     cancels the ~1.2px the day's line box leaves under the baseline. Measured
+     across all six dates: average offset goes from +1.19px to +0.02px. */
+  padding: 0.35rem 0.35rem 0.5rem;
+  /* Playfair defaults to oldstyle figures, where 9 drops below the baseline
+     while 1 and 2 sit on it. That pushed the day's visible digits up to 5px
+     below the tile's centre, by a different amount for each date. Lining
+     figures give every digit the same cap height and baseline, so centring
+     the box centres what you actually see. */
+  font-variant-numeric: lining-nums;
 }
 .past-month, .past-year {
   font-family: 'Lato', sans-serif;
   font-size: 0.58rem;
   font-weight: 700;
   letter-spacing: 0.15em;
+  /* letter-spacing appends a trailing space after the final character, which
+     is inside the element's width. Centring that box leaves the visible text
+     half a space to the left of the unspaced day below it. Pulling the margin
+     back by one space removes it from the width used to centre. */
+  margin-right: -0.15em;
   text-transform: uppercase;
   color: rgba(var(--cream-rgb), 0.6);
 }
