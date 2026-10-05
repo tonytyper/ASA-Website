@@ -1,9 +1,9 @@
 import { createClient, type SupabaseClient } from "@supabase/supabase-js"
 
 /**
- * Cache tag for every gallery read. An ingest run can call
- * `revalidateTag(GALLERY_CACHE_TAG)` to publish new photos immediately instead
- * of waiting out the window below.
+ * Cache tag for every gallery read. The ingest script invalidates it through
+ * `POST /api/revalidate` once it has published, so new photos appear on the
+ * next visit instead of waiting out the window below.
  */
 export const GALLERY_CACHE_TAG = "gallery"
 

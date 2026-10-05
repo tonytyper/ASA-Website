@@ -21,6 +21,10 @@
  * Requires NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SECRET_KEY. The secret key
  * bypasses row level security, which is why this runs from a terminal and
  * never from the site.
+ *
+ * With SITE_URL and REVALIDATE_SECRET also set, a finished run asks the live
+ * site to drop its cached gallery, so changes appear on the next visit rather
+ * than within the hour.
  */
 
 import { createHash } from "node:crypto"
@@ -503,6 +507,56 @@ async function ensureCover(
   if (error) throw new Error(`setting cover for ${albumSlug}: ${error.message}`)
 }
 
+/**
+ * Asks the live site to drop its cached gallery via POST /api/revalidate.
+ *
+ * A failure here is reported, never fatal: the photos are already published,
+ * and the site's hourly revalidation surfaces them regardless.
+ */
+async function refreshSiteCache(): Promise<void> {
+  const siteUrl = process.env.SITE_URL
+  const secret = process.env.REVALIDATE_SECRET
+
+  if (!siteUrl || !secret) {
+    console.log("\nSkipped the site cache refresh (SITE_URL or REVALIDATE_SECRET not set). Changes appear within the hour.")
+    return
+  }
+
+  const endpoint = new URL("/api/revalidate", siteUrl)
+
+  try {
+    const response = await fetch(endpoint, {
+      method: "POST",
+      headers: { authorization: `Bearer ${secret}` },
+      // fetch strips Authorization when it follows a redirect to another
+      // origin, so the apex-to-www redirect would surface as a baffling 401.
+      // Stop at the redirect and name the address to use instead.
+      redirect: "manual",
+      // An unreachable site should not hang the end of a finished run.
+      signal: AbortSignal.timeout(15_000),
+    })
+
+    if (response.ok) {
+      console.log(`\nRefreshed the gallery cache on ${endpoint.host}: changes are live on the next visit.`)
+      return
+    }
+
+    if (response.status >= 300 && response.status < 400) {
+      const location = response.headers.get("location")
+      // Name the origin, not the full endpoint path the redirect points at.
+      const target = location ? new URL(location, endpoint).origin : "the address it redirects to"
+      console.warn(`\nSITE_URL redirects to ${target}; set SITE_URL to that so the refresh can authenticate. Changes appear within the hour.`)
+      return
+    }
+
+    const body = (await response.json().catch(() => ({}))) as { error?: string }
+    console.warn(`\nCould not refresh the site cache (HTTP ${response.status}${body.error ? `: ${body.error}` : ""}). Changes appear within the hour.`)
+  } catch (error) {
+    const reason = error instanceof Error ? error.message : String(error)
+    console.warn(`\nCould not reach ${endpoint.host} to refresh its cache (${reason}). Changes appear within the hour.`)
+  }
+}
+
 async function main(): Promise<void> {
   const { values, positionals } = parseArgs({
     allowPositionals: true,
@@ -559,9 +613,9 @@ async function main(): Promise<void> {
       `${totals.albums} album(s); ${totals.skipped} already published.`,
   )
 
-  if (!dryRun && totals.uploaded + totals.reordered > 0) {
-    console.log("The site picks these up within the hour, or immediately on the next deploy.")
-  }
+  // Every real run refreshes, not only ones that uploaded: a changed title,
+  // date, or cover in album.json is a change the site should show too.
+  if (!dryRun) await refreshSiteCache()
 
   if (totals.failures.length > 0) {
     console.error(`\n${totals.failures.length} photo(s) could not be published:`)
