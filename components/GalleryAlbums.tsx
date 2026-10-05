@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useEffect, useState, type CSSProperties } from "react"
+import { useCallback, useEffect, useRef, useState, type CSSProperties, type RefObject } from "react"
 import Image, { getImageProps } from "next/image"
 
 import type { GalleryAlbum, GalleryPhoto } from "@/lib/gallery"
@@ -63,8 +63,59 @@ function formatEventDate(isoDate: string | null): string | null {
   return Number.isNaN(parsed.getTime()) ? null : eventDateFormat.format(parsed)
 }
 
+/**
+ * Masonry without reordering. Once active, the grid's rows are 1px tall and each
+ * card spans its own height plus the gap, so every card sits exactly one gap
+ * below the card above it instead of waiting for the tallest card in its row.
+ *
+ * Cards stay in document order, so the newest-first sequence, tab order and
+ * screen-reader order all still agree. Splitting cards into per-column wrappers
+ * or using CSS columns would get the same look but reorder one or the other.
+ *
+ * Off until measured, so the server-rendered grid is a plain one: with 1px rows
+ * and no spans yet, every card would collapse onto a single row.
+ */
+function useMasonry(gridRef: RefObject<HTMLDivElement | null>, itemCount: number): boolean {
+  const [active, setActive] = useState(false)
+
+  useEffect(() => {
+    const grid = gridRef.current
+    if (!grid) return
+
+    const cards = Array.from(grid.children) as HTMLElement[]
+
+    const layout = () => {
+      // Read the gap from the stylesheet so it stays the single source. The
+      // column gap, because masonry mode zeroes the row gap it replaces.
+      const gap = parseFloat(getComputedStyle(grid).columnGap) || 0
+      for (const card of cards) {
+        card.style.gridRowEnd = `span ${Math.ceil(card.getBoundingClientRect().height + gap)}`
+      }
+    }
+
+    layout()
+    setActive(true)
+
+    // A title rewrapping at a new width changes a card's height. Setting the
+    // spans cannot resize the cards back (they are top-aligned, not stretched),
+    // so this never feeds itself.
+    const observer = new ResizeObserver(layout)
+    for (const card of cards) observer.observe(card)
+
+    return () => {
+      observer.disconnect()
+      for (const card of cards) card.style.removeProperty("grid-row-end")
+      setActive(false)
+    }
+  }, [gridRef, itemCount])
+
+  return active
+}
+
 export default function GalleryAlbums({ albums }: { albums: GalleryAlbum[] }) {
   const [openAlbum, setOpenAlbum] = useState<GalleryAlbum | null>(null)
+  const gridRef = useRef<HTMLDivElement>(null)
+  const masonry = useMasonry(gridRef, albums.length)
   // Index into openAlbum.photos, so the arrow keys have something to step
   // through; null means the album grid is showing rather than one photo.
   const [zoomedIndex, setZoomedIndex] = useState<number | null>(null)
@@ -136,7 +187,7 @@ export default function GalleryAlbums({ albums }: { albums: GalleryAlbum[] }) {
 
   return (
     <>
-      <div className="gallery-grid">
+      <div ref={gridRef} className={masonry ? "gallery-grid gallery-grid--masonry" : "gallery-grid"}>
         {albums.map((album) => {
           const [cover] = album.photos
           const eventDate = formatEventDate(album.eventDate)

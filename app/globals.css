@@ -1133,6 +1133,18 @@ section {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 1.5rem;
+  /* Each card is only as tall as its own title and date, rather than stretching
+     to the tallest card in its row, so the date always sits right under the
+     title. */
+  align-items: start;
+}
+
+/* Masonry mode, switched on by GalleryAlbums once it has measured the cards.
+   Rows are 1px and each card spans its height plus the gap, so the vertical
+   gap between any card and the one above it is always the same 1.5rem. */
+.gallery-grid--masonry {
+  grid-auto-rows: 1px;
+  row-gap: 0;
 }
 
 .gallery-item {
