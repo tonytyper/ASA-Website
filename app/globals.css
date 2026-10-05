@@ -1077,14 +1077,16 @@ section {
   cursor: default;
 }
 
-/* Width/height on the element give the aspect ratio; these caps let the photo
-   scale to whichever axis runs out of room first, without distortion. */
+/* Sized explicitly to whichever axis runs out of room first; the width/height
+   attributes supply the aspect ratio for the height. Leaving width at auto
+   instead would take it from the srcset candidate's declared density, and as
+   the optimizer never upscales, a 2400px photo served for a "3840w" candidate
+   would be drawn at ~60% of its real size. --photo-ratio is set per photo, and
+   lightboxSizes() in GalleryAlbums.tsx mirrors these numbers. */
 .lightbox-image {
-  width: auto;
+  width: min(92vw, 1100px, calc(82vh * var(--photo-ratio)));
   height: auto;
   max-width: 100%;
-  max-height: 82vh;
-  object-fit: contain;
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
 }
 
@@ -1123,7 +1125,7 @@ section {
 
 @media (max-width: 640px) {
   .lightbox-nav { font-size: 2.5rem; padding: 0.75rem 0.35rem; }
-  .lightbox-image { max-height: 74vh; }
+  .lightbox-image { width: min(92vw, calc(74vh * var(--photo-ratio))); }
 }
 
 .gallery-grid {
